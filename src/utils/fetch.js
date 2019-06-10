@@ -12,6 +12,37 @@ var instance = axios.create({
 });
 
 /**
+ * 添加请求拦截器
+ */
+instance.interceptors.request.use((config) => {
+	//请求前做操作
+	const { params, headers } = config;
+
+	//去除空的请求属性
+	Object.keys(params).forEach(key =>{
+		let value = params[key];
+		if(value === '' || value === null || value === void 0){
+			Reflect.deleteProperty(params, key);
+		}
+	})
+	return config;
+}, (error) => {
+	return Promise.reject(error);
+});
+
+/**
+ * 添加响应拦截器
+ */
+instance.interceptors.response.use((response)=>{
+	//响应数据操作
+
+	return response;
+},(error)=>{
+	return Promise.reject(error)
+})
+
+
+/**
  * get方法
  * @param url
  * @param params
@@ -47,3 +78,5 @@ export default {
 	get,
 	post,
 }
+
+
