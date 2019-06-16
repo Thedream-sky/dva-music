@@ -1,6 +1,5 @@
 import axios from 'axios';
 import {BASE_URL} from "../configs/app.config";
-import React, {Component} from 'react';
 
 // 创建实例时设置配置的默认值
 /**
